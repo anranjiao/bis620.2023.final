@@ -2,6 +2,7 @@
 #' @description Use a stepwise linear model to predict the death days.
 #' @param dataset feature_dth_train_norm, feature_dth_test_norm, label_dth_train_norm, label_dth_test_norm
 #' @importFrom stats predict lm step
+#' @importFrom tibble tibble
 #' @export
 
 linear_model <- function(dataset) {
@@ -14,12 +15,12 @@ linear_model <- function(dataset) {
   lrm = lm(label_dth_train_norm$DTHDY ~ .,data=feature_dth_train_norm)
   lrm1 = step(lrm)
 
-  pa_train = data.frame(
+  pa_train = tibble(
     pred=as.integer(predict(lrm1)*(max_label-min_label)+min_label),
     actual= as.integer(label_dth_train_norm$DTHDY*(max_label-min_label)+min_label))
 
 
-  pa_test = data.frame(
+  pa_test = tibble(
     pred=as.integer(predict(lrm1, feature_dth_test_norm)*(max_label-min_label)+min_label),
     actual=as.integer(label_dth_test_norm$DTHDY*(max_label-min_label)+min_label))
 
