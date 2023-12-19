@@ -1,0 +1,106 @@
+---
+title: "abstract-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{abstract-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+#install.package(devtools)
+#devtools::install_github("anranjiao/bis620.2023.final")
+# library(bis620.2023.final)
+library(dplyr)
+library(ggplot2)
+```
+
+## 1. Background and motivation
+
+The dataset investigated in this project originates from the PRIME (Panitumumab Randomized Trial in Combination with Chemotherapy for Metastatic Colorectal Cancer to Determine Efficacy). This study was conducted to assess the impacts of panitumumab treatment on top of the standard FOLFOX treatment compared to FOLFOX alone for metastatic colorectal cancer. 
+
+Given the high mortality rate associated with cancer, we adopt a pragmatic approach in this study. The motivation behind this work is to ascertain an approximate timeline for patients until their demise. By providing patients and their families with a rough estimate of the remaining days, it empowers them to make informed decisions based on the patients’ biological information and the chosen course of treatment.
+
+This study employs multiple machine learning models, encompassing linear regression, random forest, and neural networks, to forecast the duration of survival for patients since the start of the treatment. Comprehensive comparisons among each method are offered such as correlation coefficients for each patient information and the ablation study. The study specifically focuses on a cohort of patients who deceased during the study period of the treatment. Multiple features, including age, sex, race, weight, height, genetic information, and the type of treatments, are employed for training these models on a patient-by-patient basis.
+
+## 2. Research question
+
+Given comprehensive details on patients' biological information and the treatment type, can machine learning models accurately forecast the duration of patient survival until their demise?
+
+## 3. Data cleaning and exploration
+
+Our initial data cleaning process involves merging two tables, namely the "adls" and "biomark" tables, by the subject ID as the identifier. The "adls" table contains personal information such as body weight, height, and the day of death (label we aim to predict). By incorporating the "biomark" table, we augment the dataset with genetic information, which has been observed to significantly influence the efficacy of different treatment types. To focus on estimating the death date, we filter out patients who are still alive.
+
+```{r}
+# #use our comprehensive function to derive the merged table with our target variables
+# head(gen_data())
+```
+
+Prior to utilizing the dataset for training, a data preprocessing step involves converting categorical data into numeric values. Majority of machine learning algorithms require both input and output data to be in numeric form. To address this requirement, we employ integer encoding. For instance, the "sex" column containing character values "Male" or "Female" is transformed into numerical equivalents, 1 or 0, respectively. This conversion process extends to any categorical features within the dataset.
+
+Following the merger of pertinent tables and the selection of subject IDs associated with deceased individuals, the dataset is divided into features and labels for model training. We use a 9:1 split ratio is for training and testing. A validation set is omitted due to the limited number of samples available. To expedite convergence, the dataset undergoes standardization, which aligns the scale of each feature. This not only prevents certain features from dominating the learning process but also enhances numerical stability.
+
+<!-- Add a figure of correlation coefficient -->
+```{r}
+# correlation coefficient
+```
+
+For a systematic comprehension of the significance of each feature, we calculate a correlation coefficient for each feature utilized in predicting the time of death. As depicted in the figure above, features X, Y, and Z exhibit the highest correlation. This insight prompts further analysis into the predictive capabilities of the models through the execution of an ablation study.
+
+X: This feature is important because ...
+
+Y: This feature is important because ... 
+
+Z: This feature is important because ...
+
+## 4. Analysis
+
+<!-- Add a table of prediction accuracy comparing three methods -->
+```{r}
+# LR
+```
+
+```{r}
+# RF
+```
+
+```{r}
+# NN
+```
+
+Among the three methods, [X] stands out as the top performer in our study. Assuming the neural network has undergone sufficient training, it inherently exhibits superior performance compared to linear regression. This is attributed to the neural network's ability to handle non-linearity in the data through the inclusion of activation functions, allowing it to capture complex relationships. While linear regression assumes a linear relationship between input and output, limiting its flexibility, random forest, as an ensemble of decision trees, is also capable of handling nonlinear relationships. This ensemble approach enables random forest to capture intricate patterns in the data, contributing to its competitive performance alongside neural networks. The choice between neural networks and random forests ultimately depends on the specific characteristics of the data and the complexity of the underlying relationships being modeled. In this case, [X] performed the best so we use this method for further analysis of feature importance through ablation study.
+
+<!-- Add a result of ablation study -->
+
+```{r}
+# one of the three methods
+```
+
+In our ablation study, we systematically removed each of the top three features identified in the previous correlation coefficient analysis. By training the model without each feature individually, we assessed the impact on predictive performance. As anticipated, the exclusion of these crucial features resulted in a significant degradation of the model's performance, with the magnitude of the observed coefficients serving as a clear indicator of their importance. This underscores the critical role these features play in the model's ability to make accurate predictions regarding the outcome variable.
+
+<!-- Treatment Regimen (ATRT): The coefficient for 'ATRT Panitumumab + FOLFOX' is positive for partial response but negative for stable and progressive disease, indicating that adding Panitumumab to FOLFOX may increase the likelihood of a partial response but could be associated with a lower likelihood of achieving stable disease when compared to FOLFOX alone.The P-value is close to 1 which is statistically insignificant across the prediction of all kinds of responses. -->
+
+<!-- KRAS Mutation Type (TYPE): Wild-type KRAS status is negatively associated with stable and progressive disease, suggesting that patients with wild-type KRAS might be less likely to experience stable or progressive disease, aligning with clinical expectations that patients with wild-type KRAS respond better to treatments targeting EGFR.  -->
+
+<!-- The 'Unknown' type is not a statistically significant predictor in any response category, shown by the p-values being greater than 0.05. In contrast, 'Wild-type' KRAS has a statistically significant negative association with 'Stable disease', suggesting that patients with wild-type KRAS are less likely to have stable disease as a response to treatment. -->
+
+<!-- SEXMale: Being male is positively associated with 'Partial response', but this is not statistically significant, as indicated by the p-value. However, it's important to note that for 'Stable disease', being male is statistically significant, indicating that male patients may have a higher likelihood of experiencing stable disease. -->
+
+<!-- AGE: The negative coefficient for age across all response categories suggests that increasing age may slightly decrease the likelihood of a positive treatment response, which could align with the observed trend in the earlier plot showing higher response counts in the middle-age range. -->
+
+<!-- Age has a statistically significant negative effect on 'Partial response' and 'Progressive disease', suggesting that as age increases, the likelihood of having a partial response or experiencing progressive disease decreases. -->
+
+## 5. Interpretation and conclusions
+
+<!-- Our research utilizing logistic regression to predict treatment response in metastatic colorectal cancer revealed several insights. Although KRAS mutation status and patient sex appeared as potential predictors of treatment outcome, their effects varied across response categories and were not uniformly statistically significant. Age showed a consistent negative association with both partial and progressive disease responses, suggesting older patients may have a different response profile. -->
+
+<!-- Our key limitation is the small sample size and crucially, the uneven distribution of races within our data set highlighted a limitation in our analysis. The under representation of non-White races could lead to biased conclusions. Similarly, baseline demographic features like height and weight exhibited trends that could not be reliably disentangled from the population's natural distribution. Their inclusion in the model was found to introduce bias, prompting their exclusion from the final predictive features. -->
+
+<!-- In conclusion, our findings underscore the importance of considering demographic and genetic factors in predicting mCRC treatment outcomes. However, the results must be interpreted with caution due to potential biases arising from demographic imbalances within the study population. Future studies should aim for more racially diverse samples and investigate the complex interplay of demographic characteristics with cancer treatment responses to enable truly personalized medicine. -->
