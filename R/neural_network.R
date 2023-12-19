@@ -2,6 +2,7 @@ library(torch)
 #' @title Neural network to predict death days
 #' @param dataset Contains x_train, y_train, x_test, y_test, min_label,
 #' and max_label
+#' @param n number of nodes per hidden layer
 #' @return Two tibbles with a `pred` column and a `actual` column of the
 #' death days for training and testing, respectively;
 #' mae (mean absolute value) for training and testing.

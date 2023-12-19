@@ -1,2 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+<<<<<<< Updated upstream
+=======
+^data-raw$
+>>>>>>> Stashed changes

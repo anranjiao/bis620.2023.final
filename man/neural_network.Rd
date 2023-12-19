@@ -9,6 +9,8 @@ neural_network(dataset, n)
 \arguments{
 \item{dataset}{Contains x_train, y_train, x_test, y_test, min_label,
 and max_label}
+
+\item{n}{number of nodes per hidden layer}
 }
 \value{
 Two tibbles with a \code{pred} column and a \code{actual} column of the
