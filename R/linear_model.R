@@ -23,7 +23,7 @@ linear_model <- function(dataset) {
     pred=as.integer(predict(lrm1, feature_dth_test_norm)*(max_label-min_label)+min_label),
     actual=as.integer(label_dth_test_norm$DTHDY*(max_label-min_label)+min_label))
 
-  mae_test = mean(abs(predicted_test$pred - predicted_test$actual))
-  mae_train = mean(abs(predicted_train$pred - predicted_train$actual))
+  mae_test = mean(abs(pa_test$pred - pa_test$actual))
+  mae_train = mean(abs(pa_train$pred - pa_train$actual))
   return(list(pa_train=pa_train, pa_test=pa_test, mae_train=mae_train, mae_test=mae_test))
 }

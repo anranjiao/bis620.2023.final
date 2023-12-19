@@ -1068,7 +1068,7 @@
       - BMMTR7_Mutant                              1   0.35809 27.316 -1827.7
       - `B_ECOG_Symptoms but ambulatory`           1   0.93789 27.895 -1815.1
       - `B_ECOG_In bed less than 50% of the time`  1   1.15199 28.109 -1810.5
-      [[1]]
+      $pa_train
           pred actual
       1    457    558
       2    467    301
@@ -1671,7 +1671,7 @@
       599  359    285
       600  457    313
       
-      [[2]]
+      $pa_test
          pred actual
       1   580    410
       2   299    170
@@ -1760,5 +1760,11 @@
       85  587    672
       86  581    684
       87  582    770
+      
+      $mae_train
+      [1] 226.9483
+      
+      $mae_test
+      [1] 190.5977
       
 
