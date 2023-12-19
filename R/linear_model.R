@@ -14,14 +14,16 @@ linear_model <- function(dataset) {
   lrm = lm(label_dth_train_norm$DTHDY ~ .,data=feature_dth_train_norm)
   lrm1 = step(lrm)
 
-  predicted_train = data.frame(
+  pa_train = data.frame(
     pred=as.integer(predict(lrm1)*(max_label-min_label)+min_label),
     actual= as.integer(label_dth_train_norm$DTHDY*(max_label-min_label)+min_label))
 
 
-  predicted_test = data.frame(
+  pa_test = data.frame(
     pred=as.integer(predict(lrm1, feature_dth_test_norm)*(max_label-min_label)+min_label),
     actual=as.integer(label_dth_test_norm$DTHDY*(max_label-min_label)+min_label))
 
-  return(list(predicted_train, predicted_test))
+  mae_test = mean(abs(predicted_test$pred - predicted_test$actual))
+  mae_train = mean(abs(predicted_train$pred - predicted_train$actual))
+  return(list(pa_train=pa_train, pa_test=pa_test, mae_train=mae_train, mae_test=mae_test))
 }
