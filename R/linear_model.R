@@ -1,6 +1,7 @@
 #' @title Linear model for prediction
 #' @description Use a stepwise linear model to predict the death days.
-#' @param dataset feature_dth_train_norm, feature_dth_test_norm, label_dth_train_norm, label_dth_test_norm
+#' @param dataset Contains x_train, y_train, x_test, y_test, min_label,
+#' and max_label
 #' @importFrom stats predict lm step
 #' @importFrom tibble tibble
 #' @export

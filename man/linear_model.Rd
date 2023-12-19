@@ -7,7 +7,8 @@
 linear_model(dataset)
 }
 \arguments{
-\item{dataset}{feature_dth_train_norm, feature_dth_test_norm, label_dth_train_norm, label_dth_test_norm}
+\item{dataset}{Contains x_train, y_train, x_test, y_test, min_label,
+and max_label}
 }
 \description{
 Use a stepwise linear model to predict the death days.

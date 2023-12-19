@@ -1,4 +1,3 @@
-library(torch)
 #' @title Neural network to predict death days
 #' @param dataset Contains x_train, y_train, x_test, y_test, min_label,
 #' and max_label
@@ -7,10 +6,11 @@ library(torch)
 #' death days for training and testing, respectively;
 #' mae (mean absolute value) for training and testing.
 #' @importFrom torch nn_module nn_linear nnf_relu nnf_sigmoid
-#' @importFrom torch torch_tensor optim_adam nnf_mse_loss
+#' @importFrom torch torch_tensor optim_adam nnf_mse_loss torch_manual_seed
 #' @importFrom tibble tibble
 
 neural_network = function(dataset, n){
+  torch_manual_seed(0)
   my_module = nn_module(
     initialize = function(in_features, out_features) {
       self$l1 = nn_linear(in_features, n, bias = TRUE)

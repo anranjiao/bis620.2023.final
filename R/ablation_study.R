@@ -1,11 +1,9 @@
 #' Conducts ablation study on a given dataset by removing one column
 #'
 #' one feature will be removed from the dataset to determine the performance degradation
-#' @param train_set training set (includes features and label)
-#' @param test_set test set (includes features and label)
-#' @param del_feature string of feature name to exclude
-#' @param max_label maximum value of the label
-#' @param min_label minimum value of the label
+#' @param dataset Contains x_train, y_train, x_test, y_test, min_label,
+#' @param del_feature Features to be deleted
+#' and max_label
 #' @return a test error
 #' @importFrom randomForestSRC rfsrc
 #' @export

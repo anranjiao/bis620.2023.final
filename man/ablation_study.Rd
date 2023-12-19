@@ -7,15 +7,10 @@
 ablation_study(dataset, del_feature)
 }
 \arguments{
-\item{del_feature}{string of feature name to exclude}
+\item{dataset}{Contains x_train, y_train, x_test, y_test, min_label,}
 
-\item{train_set}{training set (includes features and label)}
-
-\item{test_set}{test set (includes features and label)}
-
-\item{max_label}{maximum value of the label}
-
-\item{min_label}{minimum value of the label}
+\item{del_feature}{Features to be deleted
+and max_label}
 }
 \value{
 a test error
