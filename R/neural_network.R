@@ -8,6 +8,7 @@
 #' @importFrom torch nn_module nn_linear nnf_relu nnf_sigmoid
 #' @importFrom torch torch_tensor optim_adam nnf_mse_loss torch_manual_seed
 #' @importFrom tibble tibble
+#' @export
 
 neural_network = function(dataset, n){
   torch::install_torch()
