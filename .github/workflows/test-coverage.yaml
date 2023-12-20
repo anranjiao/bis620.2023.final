@@ -12,6 +12,8 @@ jobs:
   test-coverage:
     runs-on: ubuntu-latest
     env:
+      TORCH_INSTALL: 1
+      TORCH_TEST: 1
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
