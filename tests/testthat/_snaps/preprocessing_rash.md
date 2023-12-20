@@ -2,8 +2,6 @@
 
     Code
       preprocessing_rash(adsl, biomark, adae, 800)
-    Message <rlang_message>
-      Joining with `by = join_by(SUBJID)`
     Output
       $x_train
            ATRT_Panitumumab + FOLFOX PRSURG_Y LIVERMET_Y       AGE SEX_Male  B_WEIGHT

@@ -5,3 +5,5 @@
 ^data-raw$
 >>>>>>> Stashed changes
 ^\.github$
+^LICENSE.md
+^abstract-vignette.html

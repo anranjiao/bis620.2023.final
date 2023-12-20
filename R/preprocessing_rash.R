@@ -67,8 +67,10 @@ preprocessing_rash <- function(info, biomark, adae, num_train) {
   feature_dth_test_norm$B_WEIGHT = (feature_dth_test_norm$B_WEIGHT-min_weight)/(max_weight-min_weight)
   feature_dth_test_norm$B_HEIGHT = (feature_dth_test_norm$B_HEIGHT-min_hight)/(max_hight-min_hight)
 
-  rash = left_join(info |> select('SUBJID'),
-                   adae |> filter(AEPT=='Rash') |> select('SUBJID', 'AEPT') |>distinct())
+
+  rash = info |>
+    left_join(adae |> filter(AEPT=='Rash') |> select('SUBJID', 'AEPT') |>distinct(), by = "SUBJID")
+  rash = rash |> select('SUBJID', 'AEPT')
   rash$AEPT[!is.na(rash$AEPT)]=1
   rash$AEPT[is.na(rash$AEPT)]=0
   rash$AEPT=as.integer(rash$AEPT)
