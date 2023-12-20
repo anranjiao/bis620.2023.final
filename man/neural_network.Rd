@@ -4,11 +4,20 @@
 \alias{neural_network}
 \title{Neural network to predict death days}
 \usage{
-neural_network(dataset, n)
+neural_network(x_train, y_train, x_test, y_test, min_label, max_label, n)
 }
 \arguments{
-\item{dataset}{Contains x_train, y_train, x_test, y_test, min_label,
-and max_label}
+\item{x_train}{features for training}
+
+\item{y_train}{label for training#'}
+
+\item{x_test}{features for testing}
+
+\item{y_test}{label for testing}
+
+\item{min_label}{minimun value of label}
+
+\item{max_label}{maximun value of label}
 
 \item{n}{number of nodes per hidden layer}
 }

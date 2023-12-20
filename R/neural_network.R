@@ -1,6 +1,10 @@
 #' @title Neural network to predict death days
-#' @param dataset Contains x_train, y_train, x_test, y_test, min_label,
-#' and max_label
+#' @param x_train features for training
+#' @param y_train label for training#'
+#' @param x_test features for testing
+#' @param y_test label for testing
+#' @param min_label minimun value of label
+#' @param max_label maximun value of label
 #' @param n number of nodes per hidden layer
 #' @return Two tibbles with a `pred` column and a `actual` column of the
 #' death days for training and testing, respectively;
@@ -9,7 +13,7 @@
 #' @importFrom torch torch_tensor optim_adam nnf_mse_loss torch_manual_seed
 #' @importFrom tibble tibble
 
-neural_network = function(dataset, n){
+neural_network = function(x_train, y_train, x_test, y_test, min_label, max_label, n){
   torch::install_torch()
   my_module = nn_module(
     initialize = function(in_features, out_features) {
@@ -25,18 +29,7 @@ neural_network = function(dataset, n){
     }
   )
 
-  x_train = dataset$x_train
-  y_train = dataset$y_train
-  x_test = dataset$x_test
-  y_test = dataset$y_test
-  min_label = dataset$min_label
-  max_label = dataset$max_label
-
-  y = torch_tensor(as.matrix(y_train))
-  x = torch_tensor(as.matrix(x_train))
-
-
-  mm = my_module(ncol(x), 1)
+  mm = my_module(ncol(x_train), 1)
   optimizer = optim_adam(mm$parameters)
   num_it = 2000
 
@@ -44,22 +37,20 @@ neural_network = function(dataset, n){
 
   for (i in seq_len(num_it)) {
     optimizer$zero_grad()
-    pred = mm(x)
-    loss = nnf_mse_loss(y, pred)
+    pred = mm(x_train)
+    loss = nnf_mse_loss(y_train, pred)
     loss$backward()
     losses[i] = as.numeric(loss)
     optimizer$step()
   }
   mm$parameters
 
-  y_test = torch_tensor(as.matrix(y_test))
-  x_test = torch_tensor(as.matrix(x_test))
   pred_test = mm(x_test)
-  pred_train = mm(x)
+  pred_train = mm(x_train)
 
   pa_train = tibble(
     pred = as.integer(pred_train*(max_label-min_label)+min_label),
-    actual = as.integer(y*(max_label-min_label)+min_label)
+    actual = as.integer(y_train*(max_label-min_label)+min_label)
   )
   pa_test = tibble(
     pred = as.integer(pred_test*(max_label-min_label)+min_label),
