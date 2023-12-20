@@ -10,6 +10,7 @@
 #' @importFrom tibble tibble
 
 neural_network = function(dataset, n){
+  Sys.setenv(TORCH_INSTALL=1)
   torch::install_torch()
   my_module = nn_module(
     initialize = function(in_features, out_features) {
