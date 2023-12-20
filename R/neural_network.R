@@ -11,6 +11,7 @@
 
 neural_network = function(dataset, n){
   torch::install_torch()
+  torch::torch_manual_seed(1)
   my_module = nn_module(
     initialize = function(in_features, out_features) {
       self$l1 = nn_linear(in_features, n, bias = TRUE)
