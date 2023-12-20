@@ -32,8 +32,8 @@ neural_network = function(dataset, n){
   min_label = dataset$min_label
   max_label = dataset$max_label
 
-  y = torch_tensor(as.matrix(y_train), device = "cpu")
-  x = torch_tensor(as.matrix(x_train), device = "cpu")
+  y = torch_tensor(as.matrix(y_train))
+  x = torch_tensor(as.matrix(x_train))
 
 
   mm = my_module(ncol(x), 1)
@@ -52,8 +52,8 @@ neural_network = function(dataset, n){
   }
   mm$parameters
 
-  y_test = torch_tensor(as.matrix(y_test), device = "cpu")
-  x_test = torch_tensor(as.matrix(x_test), device = "cpu")
+  y_test = torch_tensor(as.matrix(y_test))
+  x_test = torch_tensor(as.matrix(x_test))
   pred_test = mm(x_test)
   pred_train = mm(x)
 
