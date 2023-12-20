@@ -11,6 +11,11 @@
 You can install the development version of bis620.2022.2023 from
 [GitHub](https://github.com/) with:
 
+```{r}
+# install.packages("devtools")
+# devtools::install_github("anranjiao/bis620.2023.final")
+```
+
 ## Example
 
 This is a basic example for predicting the remaining survival days for the patients using three different models:
