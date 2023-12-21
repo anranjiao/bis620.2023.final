@@ -25,9 +25,9 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHwzNjAuMDB8MC4wMHw1NzYuMDA=)'>
-<text x='194.40' y='34.48' text-anchor='middle' style='font-size: 14.40px; font-weight: bold; font-family: sans;' textLength='297.78px' lengthAdjust='spacingAndGlyphs'>Histogram of the absolute error of training data</text>
-<text x='194.40' y='557.28' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='76.72px' lengthAdjust='spacingAndGlyphs'>#Training data</text>
-<text transform='translate(12.96,280.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='75.38px' lengthAdjust='spacingAndGlyphs'>Absolute error</text>
+<text x='194.40' y='34.48' text-anchor='middle' style='font-size: 14.40px; font-weight: bold; font-family: sans;' textLength='157.69px' lengthAdjust='spacingAndGlyphs'>Absolute error of training</text>
+<text x='194.40' y='557.28' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='75.38px' lengthAdjust='spacingAndGlyphs'>Absolute error</text>
+<text transform='translate(12.96,280.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='56.71px' lengthAdjust='spacingAndGlyphs'>Frequency</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 <line x1='69.07' y1='502.56' x2='291.88' y2='502.56' style='stroke-width: 0.75;' />
@@ -80,9 +80,9 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMzYwLjAwfDcyMC4wMHwwLjAwfDU3Ni4wMA==)'>
-<text x='554.40' y='34.48' text-anchor='middle' style='font-size: 14.40px; font-weight: bold; font-family: sans;' textLength='292.98px' lengthAdjust='spacingAndGlyphs'>Histogram of the absolute error of testing data</text>
-<text x='554.40' y='557.28' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='72.72px' lengthAdjust='spacingAndGlyphs'>#Testing data</text>
-<text transform='translate(372.96,280.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='75.38px' lengthAdjust='spacingAndGlyphs'>Absolute error</text>
+<text x='554.40' y='34.48' text-anchor='middle' style='font-size: 14.40px; font-weight: bold; font-family: sans;' textLength='152.89px' lengthAdjust='spacingAndGlyphs'>Absolute error of testing</text>
+<text x='554.40' y='557.28' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='75.38px' lengthAdjust='spacingAndGlyphs'>Absolute error</text>
+<text transform='translate(372.96,280.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: sans;' textLength='56.71px' lengthAdjust='spacingAndGlyphs'>Frequency</text>
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 <line x1='429.07' y1='502.56' x2='660.45' y2='502.56' style='stroke-width: 0.75;' />

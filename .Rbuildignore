@@ -7,3 +7,4 @@
 ^\.github$
 ^LICENSE.md
 ^abstract-vignette.html
+^README.Rmd
