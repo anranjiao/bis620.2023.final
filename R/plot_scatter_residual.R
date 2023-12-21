@@ -20,11 +20,15 @@ pa_train$row_num = seq_along(pa_train$residual)
 
 train_plot = ggplot(pa_train, aes(x = row_num, y = residual)) +
   geom_point() +
-  theme_bw()
+  theme_bw() +
+  xlab("No. of data") +
+  ylab("Residual")
 
 test_plot = ggplot(pa_test, aes(x = row_num, y = residual)) +
   geom_point() +
-  theme_bw()
+  theme_bw() +
+  xlab("No. of data") +
+  ylab("Residual")
 
 if (test) {
   test_plot
