@@ -14,7 +14,7 @@ linear_model <- function(dataset) {
   max_label = dataset$max_label
   min_label = dataset$min_label
   lrm = lm(label_dth_train_norm$DTHDY ~ .,data=feature_dth_train_norm)
-  lrm1 = step(lrm)
+  lrm1 = step(lrm, trace=0)
 
   pa_train = tibble(
     pred=as.integer(predict(lrm1)*(max_label-min_label)+min_label),
