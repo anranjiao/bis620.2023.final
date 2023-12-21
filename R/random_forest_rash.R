@@ -15,8 +15,9 @@ random_forest_rash <- function(dataset) {
 
   fit <- rfsrc(AEPT ~., data = feature_and_label)
 
+  pred_train = ifelse(fit$predicted>0.5, 1, 0)
   pa_train = tibble(
-    pred = (fit$predicted),
+    pred = (pred_train),
     actual = (label_dth_train_norm$AEPT)
   )
 
@@ -24,8 +25,9 @@ random_forest_rash <- function(dataset) {
 
   test_fit <- predict(fit, newdata = feature_dth_test_norm)
 
+  pred_test = ifelse(test_fit$predicted>0.5, 1, 0)
   pa_test = tibble(
-    pred = (test_fit$predicted),
+    pred = (pred_test),
     actual = (label_dth_test_norm$AEPT)
   )
 

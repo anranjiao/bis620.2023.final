@@ -46,11 +46,9 @@ dataset = preprocessing(adsl, biomark, 600)
 data = random_forest(dataset)
 plot_histogram(data, 12)
 plot_scatter_residual(data)
-
 data("adae")
 dataset = preprocessing_rash(adsl, biomark, adae, 800)
-data = random_forest_rash(dataset)
-plot_histogram(data, 12)
+random_forest_rash(dataset)
 ```
 
 ## Test Coverage
