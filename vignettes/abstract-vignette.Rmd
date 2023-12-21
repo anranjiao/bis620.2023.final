@@ -30,7 +30,7 @@ This study employs multiple machine learning models, encompassing linear regress
 
 ## 2. Research question
 
-Given comprehensive details on patients' biological information and the treatment type, can machine learning models accurately forecast the duration of patient survival until their demise?
+Given comprehensive details on patients' biological information and the treatment type, can machine learning models accurately forecast the duration of patient survival until their demise? Can these information provide further insights into predicting side effects arising from differnet types of treatments?
 
 ## 3. Data cleaning and exploration
 
@@ -63,28 +63,36 @@ BMMTR2_Mutant: This features is also a categorical value on whether the patient 
 
 ## 4. Analysis
 
-```{r}
+```{r, fig.width=7, fig.height=4}
 # LR
 lr_output = linear_model(dataset)
 print(lr_output$mae_test)
 plot_histogram(lr_output, 12)
 ```
 
-```{r}
+```{r, fig.width=7, fig.height=4}
 # RF
 rf_output = random_forest(dataset)
 print(rf_output$mae_test)
 plot_histogram(rf_output, 12)
 ```
 
-```{r}
+```{r, fig.width=7, fig.height=4}
 # NN
 nn_output = neural_network(dataset, 5) # 5 neurons per hidden layer
 print(nn_output$mae_test)
 plot_histogram(nn_output, 12)
 ```
 
-Among the three methods, random forest stands out as the top performer in our study. Assuming the neural network has undergone sufficient training, it theoretically should exhibit superior performance compared to linear regression because of its ability to handle non-linearity in the data through the inclusion of activation functions, allowing it to capture complex relationships. However, based on the result above, the neural network is the worst model. It requires significant hyperparameter tuning to match the satisfactory accuracy compared to that of linear model. While linear regression assumes a linear relationship between input and output which limits its flexibility, random forest, as an ensemble of decision trees, is also capable of handling nonlinear relationships. This ensemble approach enables random forest to capture intricate patterns in the data, contributing to its competitive performance among the three. Through multiple trees, random forest further reduces bias. The choice between linear model and random forests ultimately depends on the specific characteristics of the data and the complexity of the underlying relationships being modeled. In this case, random performed the best especially since the dataset is consisted of several categorical values which are discrete. Therefore, we use this random forest model for further analysis of feature importance through ablation study.
+Among the three methods, random forest stands out as the top performer in our study. Although histogram has been chosen to visualize the errors above, the user may decide to use a scatter plot, included in the package (plot_scatter_residual()) instead if desired. Assuming the neural network has undergone sufficient training, it theoretically should exhibit superior performance compared to linear regression because of its ability to handle non-linearity in the data through the inclusion of activation functions, allowing it to capture complex relationships. However, based on the result above, the neural network is the worst model. It requires significant hyperparameter tuning to match the satisfactory accuracy compared to that of linear model. While linear regression assumes a linear relationship between input and output which limits its flexibility, random forest, as an ensemble of decision trees, is also capable of handling nonlinear relationships. This ensemble approach enables random forest to capture intricate patterns in the data, contributing to its competitive performance among the three. Through multiple trees, random forest further reduces bias. The choice between linear model and random forests ultimately depends on the specific characteristics of the data and the complexity of the underlying relationships being modeled. In this case, random performed the best especially since the dataset is consisted of several categorical values which are discrete. Therefore, we use this random forest model for further analysis of feature importance through ablation study.
+
+```{r}
+data("adae")
+dataset_rash = preprocessing_rash(adsl, biomark, adae, 800)
+random_forest_rash(dataset_rash)
+```
+
+The treatment may cause certain side effects such as rash. There is an additional function in this package in which such side effect can be predicted based on the current biological and clinical information of the patients. We specifically try to predict whether the patient will have a rash or not using a random forest model as shown above. This has an accuracy over 70% on a test set while training accuracy is above 90%. This additional feature shows potential of the machine learning model to make predictions on other labels.
 
 ```{r}
 remove_active = ablation_study(dataset, 'B_ECOG_Fully active')
@@ -92,12 +100,13 @@ print(remove_active)
 remove_race = ablation_study(dataset, 'BMMTR2_Mutant')
 print(remove_race)
 ```
+
 In our ablation study, we systematically removed the feature with the highest correlation with a death day and the one with the lowest. By training the model without each feature individually, we assessed the impact on predictive performance. As anticipated, the exclusion of top feature resulted in a significant degradation of the model's performance (Mean Absolute Error on Test Set approximately from 181 to 185), with the magnitude of the observed coefficients serving as a clear indicator of their importance. This underscores the critical role these features play in the model's ability to make accurate predictions regarding the outcome variable. At the same time, removing BMMTR2_Mutant feature still degraded the random forest model's performance by 1, which means this feature still has a decent impact on the model's capacity. 
 
 ## 5. Interpretation and conclusions
 
 This research involves the application of three distinct models to forecast the remaining days of patients until their death. Given the broad spectrum of patients' survival days, spanning from 7 to 1310, we acknowledge that achieving a mean absolute error of 181 on the test set is not highly accurate. This outcome aligns with expectations, considering the inherent difficulty in predicting the future lifespan of a patient based solely on biological and clinical information, coupled with the constraint of a relatively small dataset (600 samples for training).
 
-Despite the inherent challenges, this analysis offers valuable insights into features that strongly correlate with a patient's health. Notably, it highlights that the random forest model performs well for datasets of this nature, especially those containing multiple categorical values.
+Despite the inherent challenges, this analysis offers valuable insights into features that strongly correlate with a patient's health. Notably, it highlights that the random forest model performs well for datasets of this nature, especially those containing multiple categorical values. Future work may be conducted on exploring the model's capacity on predicting other labels such as side effects other than rash.
 
 In conclusion, while the current accuracy is modest, machine learning models demonstrate potential in providing patients' families with approximate days of survival. As anticipated, enhancing the predictive performance could be achieved with a larger training sample size. The proficiency of the random forest model, particularly in handling datasets with numerous categorical values, underscores its suitability for such applications. 
