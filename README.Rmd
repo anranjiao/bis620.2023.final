@@ -1,0 +1,58 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# bis620.2023
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/anranjiao/bis620.2023.final/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/anranjiao/bis620.2023.final/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/anranjiao/bis620.2023.final/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/anranjiao/bis620.2023.final/actions/workflows/test-coverage.yaml)
+<!-- badges: end -->
+
+## Installation
+
+You can install the development version of bis620.2023.final from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+# devtools::install_github("anranjiao/bis620.2023.final")
+```
+
+## Description
+
+The dataset investigated in this project originates from the PRIME (Panitumumab Randomized Trial in Combination with Chemotherapy for Metastatic Colorectal Cancer to Determine Efficacy). This study was conducted to assess the impacts of panitumumab treatment on top of the standard FOLFOX treatment compared to FOLFOX alone for metastatic colorectal cancer. We utilize three different models to predict the death days of the patients and the side effect such as rash.
+
+## Examples
+
+These are some basic examples:
+
+```{r example}
+library(bis620.2023.final)
+
+data("adsl")
+data("biomark")
+dataset = preprocessing(adsl, biomark, 600)
+data = random_forest(dataset)
+plot_histogram(data, 12)
+plot_scatter_residual(data)
+
+data("adae")
+dataset = preprocessing_rash(adsl, biomark, adae, 800)
+data = random_forest_rash(dataset)
+plot_histogram(data, 12)
+```
+
+## Test Coverage
+
+[Link](https://github.com/anranjiao/bis620.2023.final/actions/runs/7280401561)

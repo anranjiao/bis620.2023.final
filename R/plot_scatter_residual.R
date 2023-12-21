@@ -3,7 +3,7 @@
 #' @param dataset feature_dth_train_norm, feature_dth_test_norm, label_dth_train_norm, label_dth_test_norm
 #' @param test boolean whether to plot test or train
 #' @importFrom randomForestSRC rfsrc
-#' @importFrom ggplot2 ggplot aes geom_point theme_bw
+#' @importFrom ggplot2 ggplot aes geom_point theme_bw xlab ylab
 #' @export
 
 plot_scatter_residual <- function(dataset, test = TRUE) {
